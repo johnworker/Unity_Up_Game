@@ -15,6 +15,7 @@ TagManager:
   - PlayerRay
   - Rocket
   - Border
+  - BorderBullet
   layers:
   - Default
   - TransparentFX
