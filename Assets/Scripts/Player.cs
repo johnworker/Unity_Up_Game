@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,9 @@ namespace kan
         public bool isTouchRight;
         public bool isTouchLeft;
 
+        public GameObject bulletObjA;
+        public GameObject bulletObjB;
+
         Animator anim;
 
         void Awake()
@@ -20,6 +24,12 @@ namespace kan
         }
 
         void Update()
+        {
+            Move();
+            Fire();
+        }
+
+        void Move()
         {
             float h = Input.GetAxisRaw("Horizontal");
             if ((isTouchRight && h == 1) || (isTouchLeft && h == -1))
@@ -39,6 +49,13 @@ namespace kan
             {
                 anim.SetInteger("Input", (int)h);
             }
+        }
+
+        void Fire()
+        {
+            GameObject bullet = Instantiate(bulletObjA, transform.position, transform.rotation);
+            Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
+            rigid.AddForce(Vector2.up, ForceMode2D.Impulse);
         }
 
         void OnTriggerEnter2D(Collider2D collision)
