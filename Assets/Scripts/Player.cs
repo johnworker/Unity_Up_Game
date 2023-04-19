@@ -7,13 +7,24 @@ namespace kan
 {
     public class Player : MonoBehaviour
     {
-        public float speed;
+        [Header("--- 觸碰界線 ---")]
         public bool isTouchTop;
         public bool isTouchBottom;
         public bool isTouchRight;
         public bool isTouchLeft;
 
+        [Header("速度")]
+        public float speed;
+        [Header("力量")]
+        public float power;
+        [Header("最大射擊延遲")]
+        public float maxShotDelay;
+        [Header("當前射擊延遲")]
+        public float curShotDelay;
+
+        [Header("子彈A")]
         public GameObject bulletObjA;
+        [Header("子彈B")]
         public GameObject bulletObjB;
 
         Animator anim;
@@ -27,6 +38,7 @@ namespace kan
         {
             Move();
             Fire();
+            Reload();
         }
 
         void Move()
@@ -53,9 +65,48 @@ namespace kan
 
         void Fire()
         {
-            GameObject bullet = Instantiate(bulletObjA, transform.position, transform.rotation);
-            Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
-            rigid.AddForce(Vector2.up, ForceMode2D.Impulse);
+            if (!Input.GetButton("Fire1"))
+                return;
+
+            if (curShotDelay < maxShotDelay)
+                return;
+
+            switch (power)
+            {
+                // 力量
+                case 1:
+                    GameObject bullet = Instantiate(bulletObjA, transform.position, transform.rotation);
+                    Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
+                    rigid.AddForce(Vector2.up, ForceMode2D.Impulse);
+                    break;
+                case 2:
+                    GameObject bulletR = Instantiate(bulletObjA, transform.position + Vector3.right * 0.1f, transform.rotation);
+                    GameObject bulletL = Instantiate(bulletObjA, transform.position + Vector3.left * 0.1f, transform.rotation);
+                    Rigidbody2D rigidR = bulletR.GetComponent<Rigidbody2D>();
+                    Rigidbody2D rigidL = bulletL.GetComponent<Rigidbody2D>();
+                    rigidR.AddForce(Vector2.up, ForceMode2D.Impulse);
+                    rigidL.AddForce(Vector2.up, ForceMode2D.Impulse);
+                    break;
+                case 3:
+                    GameObject bulletRR = Instantiate(bulletObjA, transform.position + Vector3.right * 0.35f, transform.rotation);
+                    GameObject bulletCC = Instantiate(bulletObjB, transform.position, transform.rotation);
+                    GameObject bulletLL = Instantiate(bulletObjA, transform.position + Vector3.left * 0.35f, transform.rotation);
+                    Rigidbody2D rigidRR = bulletRR.GetComponent<Rigidbody2D>();
+                    Rigidbody2D rigidCC = bulletCC.GetComponent<Rigidbody2D>();
+                    Rigidbody2D rigidLL = bulletLL.GetComponent<Rigidbody2D>();
+                    rigidRR.AddForce(Vector2.up, ForceMode2D.Impulse);
+                    rigidCC.AddForce(Vector2.up, ForceMode2D.Impulse);
+                    rigidLL.AddForce(Vector2.up, ForceMode2D.Impulse);
+                    break;
+            }
+
+
+            curShotDelay = 0;
+        }
+
+        void Reload()
+        {
+            curShotDelay += Time.deltaTime;
         }
 
         void OnTriggerEnter2D(Collider2D collision)
