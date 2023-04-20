@@ -8,5 +8,9 @@ namespace kan
     {
         public float speed;
         public int health;
+
+        SpriteRenderer spriteRenderer;
+        Rigidbody2D rigid;
+        public Sprite[] sprites;
     }
 }
