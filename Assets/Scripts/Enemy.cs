@@ -24,7 +24,7 @@ namespace kan
         {
             health -= dmg;
             spriteRenderer.sprite = sprites[1];
-            ReturnSpirt();
+            Invoke("ReturnSpirt", 0.1f);
 
             if(health <= 0)
             {
@@ -35,6 +35,17 @@ namespace kan
         void ReturnSpirt()
         {
             spriteRenderer.sprite = sprites[0];
+        }
+
+        void OnTriggerEnter2D(Collider2D collision)
+        {
+            if(collision.gameObject.tag == "BorderBullet")
+                Destroy(gameObject);
+            else if (collision.gameObject.tag == "PlayerBullet")
+            {
+                Bullet bullet = collision.gameObject.GetComponent<Bullet>();
+                OnHit(bullet.dmg);
+            }
         }
     }
 }
