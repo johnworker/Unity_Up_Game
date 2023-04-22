@@ -12,6 +12,8 @@ namespace kan
         public float maxSpawnDelay;
         public float curSpawnDelay;
 
+        public GameObject player;
+
         void Update()
         {
             curSpawnDelay += Time.deltaTime;
@@ -34,6 +36,8 @@ namespace kan
                                spawnPoints[ranPoint].rotation);
             Enemy enemyLogic = enemy.GetComponent<Enemy>();
             Rigidbody2D rigid = enemy.GetComponent<Rigidbody2D>();
+
+            enemyLogic.player = player;
 
             // ¥k°¼¥Í¦¨
             if (ranPoint == 5 || ranPoint == 6)

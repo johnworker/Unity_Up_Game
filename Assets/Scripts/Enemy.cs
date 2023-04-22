@@ -6,6 +6,8 @@ namespace kan
 {
     public class Enemy : MonoBehaviour
     {
+        [Header("怪物名字")]
+        public string enemyName;
         [Header("速度")]
         public float speed;
         [Header("血量")]
@@ -22,12 +24,45 @@ namespace kan
         public GameObject bulletObjA;
         [Header("子彈B")]
         public GameObject bulletObjB;
+        public GameObject player;
 
         SpriteRenderer spriteRenderer;
 
         void Awake()
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
+        }
+
+        void Update()
+        {
+            Fire();
+            Reload();
+        }
+
+        void Fire()
+        {
+            if (curShotDelay < maxShotDelay)
+                return;
+
+            if(enemyName == "S")
+            {
+                GameObject bullet = Instantiate(bulletObjA, transform.position, transform.rotation);
+                Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
+
+                Vector3 dirVec = player.transform.position - transform.position;
+                rigid.AddForce(Vector2.up, ForceMode2D.Impulse);
+            }
+            else if(enemyName == "L")
+            {
+
+            }
+
+            curShotDelay = 0;
+        }
+
+        void Reload()
+        {
+            curShotDelay += Time.deltaTime;
         }
 
         void OnHit(int dmg)
