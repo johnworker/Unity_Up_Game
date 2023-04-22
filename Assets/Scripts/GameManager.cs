@@ -27,11 +27,33 @@ namespace kan
         void SpawnEnemy()
         {
             int ranEnemy = Random.Range(0, 3);
-            int ranPoint = Random.Range(0, 5);
+            int ranPoint = Random.Range(0, 9);
 
-            Instantiate(enemyObjs[ranEnemy],
-                        spawnPoints[ranPoint].position,
-                        spawnPoints[ranPoint].rotation);
+            GameObject enemy = Instantiate(enemyObjs[ranEnemy],
+                               spawnPoints[ranPoint].position,
+                               spawnPoints[ranPoint].rotation);
+            Enemy enemyLogic = enemy.GetComponent<Enemy>();
+            Rigidbody2D rigid = enemy.GetComponent<Rigidbody2D>();
+
+            // 右側生成
+            if (ranPoint == 5 || ranPoint == 6)
+            {
+                enemy.transform.Rotate(Vector3.back * 90);
+                rigid.velocity = new Vector2(enemyLogic.speed * (-1), -1);
+            }
+
+            // 左側生成
+            else if (ranPoint == 7 || ranPoint == 8)
+            {
+                enemy.transform.Rotate(Vector3.forward * 90);
+                rigid.velocity = new Vector2(enemyLogic.speed, -1);
+            }
+
+            // 前方生成
+            else
+            {
+                rigid.velocity = new Vector2(0, enemyLogic.speed * (-1));
+            }
         }
     }
 }

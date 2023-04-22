@@ -80,8 +80,8 @@ namespace kan
                     rigid.AddForce(Vector2.up, ForceMode2D.Impulse);
                     break;
                 case 2:
-                    GameObject bulletR = Instantiate(bulletObjA, transform.position + Vector3.right * 0.1f, transform.rotation);
-                    GameObject bulletL = Instantiate(bulletObjA, transform.position + Vector3.left * 0.1f, transform.rotation);
+                    GameObject bulletR = Instantiate(bulletObjA, transform.position + Vector3.right * 0.2f, transform.rotation);
+                    GameObject bulletL = Instantiate(bulletObjA, transform.position + Vector3.left * 0.2f, transform.rotation);
                     Rigidbody2D rigidR = bulletR.GetComponent<Rigidbody2D>();
                     Rigidbody2D rigidL = bulletL.GetComponent<Rigidbody2D>();
                     rigidR.AddForce(Vector2.up, ForceMode2D.Impulse);

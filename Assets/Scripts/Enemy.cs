@@ -10,17 +10,24 @@ namespace kan
         public float speed;
         [Header("血量")]
         public int health;
-
-        SpriteRenderer spriteRenderer;
-        Rigidbody2D rigid;
         [Header("狀態圖")]
         public Sprite[] sprites;
+
+        [Header("最大射擊延遲")]
+        public float maxShotDelay;
+        [Header("當前射擊延遲")]
+        public float curShotDelay;
+
+        [Header("子彈A")]
+        public GameObject bulletObjA;
+        [Header("子彈B")]
+        public GameObject bulletObjB;
+
+        SpriteRenderer spriteRenderer;
 
         void Awake()
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
-            rigid = GetComponent<Rigidbody2D>();
-            rigid.velocity = Vector2.down * speed;
         }
 
         void OnHit(int dmg)
