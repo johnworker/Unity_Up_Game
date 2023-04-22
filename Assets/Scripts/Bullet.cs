@@ -6,6 +6,7 @@ namespace kan
 {
     public class Bullet : MonoBehaviour
     {
+        [Header("¶Ë®`")]
         public int dmg;
         void OnTriggerEnter2D(Collider2D collision)
         {

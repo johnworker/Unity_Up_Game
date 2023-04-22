@@ -6,11 +6,14 @@ namespace kan
 {
     public class Enemy : MonoBehaviour
     {
+        [Header("速度")]
         public float speed;
+        [Header("血量")]
         public int health;
 
         SpriteRenderer spriteRenderer;
         Rigidbody2D rigid;
+        [Header("狀態圖")]
         public Sprite[] sprites;
 
         void Awake()
