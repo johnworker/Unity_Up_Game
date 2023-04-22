@@ -45,6 +45,8 @@ namespace kan
             {
                 Bullet bullet = collision.gameObject.GetComponent<Bullet>();
                 OnHit(bullet.dmg);
+
+                Destroy(collision.gameObject);
             }
         }
     }
