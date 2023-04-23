@@ -2273,6 +2273,7 @@ MonoBehaviour:
   - {fileID: 887686424}
   maxSpawnDelay: 2
   curSpawnDelay: 0
+  player: {fileID: 1823677991}
 --- !u!1 &1540413721
 GameObject:
   m_ObjectHideFlags: 0
@@ -2738,6 +2739,7 @@ MonoBehaviour:
     type: 3}
   bulletObjB: {fileID: 3106508950462392838, guid: b8277f8f7ed33bb49b3ace66d8b71a5e,
     type: 3}
+  manager: {fileID: 1538249819}
 --- !u!50 &1823677995
 Rigidbody2D:
   serializedVersion: 4

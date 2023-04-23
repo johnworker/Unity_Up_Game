@@ -27,6 +27,8 @@ namespace kan
         [Header("¤l¼uB")]
         public GameObject bulletObjB;
 
+        public GameManager manager;
+
         Animator anim;
 
         void Awake()
@@ -131,6 +133,11 @@ namespace kan
                         isTouchLeft = true;
                         break;
                 }
+            }
+            else if(collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "EnemyBullet")
+            {
+                manager.RespawnPlayer();
+                gameObject.SetActive(false);
             }
         }
 
