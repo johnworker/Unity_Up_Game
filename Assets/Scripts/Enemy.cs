@@ -8,6 +8,8 @@ namespace kan
     {
         [Header("怪物名字")]
         public string enemyName;
+        [Header("敵人分數")]
+        public int enemyScore;
         [Header("速度")]
         public float speed;
         [Header("血量")]
@@ -49,7 +51,7 @@ namespace kan
                 GameObject bullet = Instantiate(bulletObjA, transform.position, transform.rotation);
                 Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
                 Vector3 dirVec = player.transform.position - transform.position;
-                rigid.AddForce(dirVec * 10, ForceMode2D.Impulse);
+                rigid.AddForce(dirVec.normalized * 3, ForceMode2D.Impulse);
             }
             else if(enemyName == "L")
             {
@@ -79,6 +81,8 @@ namespace kan
 
             if(health <= 0)
             {
+                Player playerLogic = player.GetComponent<Player>();
+                playerLogic.score += enemyScore;
                 Destroy(gameObject);
             }
         }

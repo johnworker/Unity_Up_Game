@@ -13,6 +13,10 @@ namespace kan
         public bool isTouchRight;
         public bool isTouchLeft;
 
+        [Header("生命")]
+        public int life;
+        [Header("分數")]
+        public int score;
         [Header("速度")]
         public float speed;
         [Header("力量")]
@@ -136,8 +140,20 @@ namespace kan
             }
             else if(collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "EnemyBullet")
             {
-                manager.RespawnPlayer();
+                life--;
+                manager.UpdateLifeIcon(life);
+
+                if(life == 0)
+                {
+                    manager.GameOver();
+                }
+                else
+                {
+                    manager.RespawnPlayer();
+                }
+
                 gameObject.SetActive(false);
+                Destroy(collision.gameObject);
             }
         }
 

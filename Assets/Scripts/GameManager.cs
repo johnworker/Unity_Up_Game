@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 namespace kan
 {
@@ -13,6 +16,9 @@ namespace kan
         public float curSpawnDelay;
 
         public GameObject player;
+        public TextMeshProUGUI scoreText;
+        public Image[] lifeImage;
+        public GameObject gameOverSet;
 
         void Update()
         {
@@ -24,6 +30,10 @@ namespace kan
                 maxSpawnDelay = Random.Range(0.5f, 3f);
                 curSpawnDelay = 0;
             }
+
+            // UI 分數更新
+            Player playerLogic = player.GetComponent<Player>();
+            scoreText.text = string.Format("{0:n0}", playerLogic.score);
         }
 
         void SpawnEnemy()
@@ -60,6 +70,20 @@ namespace kan
             }
         }
 
+        public void UpdateLifeIcon(int life)
+        {
+            // UI 生命裡面禁用
+            for (int index = 0; index < 3; index++)
+            {
+                lifeImage[index].color = new Color(1, 1, 1, 0);
+            }
+            // UI 生命啟用
+            for (int index = 0; index < life; index++)
+            {
+                lifeImage[index].color = new Color(1, 1, 1, 1);
+            }
+        }
+
         public void RespawnPlayer()
         {
             Invoke("RespawnPlayerExe", 2f);
@@ -69,6 +93,16 @@ namespace kan
         {
             player.transform.position = Vector3.down * 3.5f;
             player.SetActive(true);
+        }
+
+        public void GameOver()
+        {
+            gameOverSet.SetActive(true);
+        }
+
+        public void RetryGame()
+        {
+            SceneManager.LoadScene(0);
         }
     }
 }
