@@ -32,7 +32,7 @@ namespace kan
         public GameObject bulletObjB;
 
         public GameManager manager;
-
+        public bool isHit;
         Animator anim;
 
         void Awake()
@@ -140,6 +140,11 @@ namespace kan
             }
             else if(collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "EnemyBullet")
             {
+                if (isHit)
+                    return;
+
+                isHit = true;
+
                 life--;
                 manager.UpdateLifeIcon(life);
 

@@ -93,6 +93,9 @@ namespace kan
         {
             player.transform.position = Vector3.down * 3.5f;
             player.SetActive(true);
+
+            Player playerLogic = player.GetComponent<Player>();
+            playerLogic.isHit = false;
         }
 
         public void GameOver()

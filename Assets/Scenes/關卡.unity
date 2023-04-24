@@ -3654,7 +3654,7 @@ MonoBehaviour:
   life: 3
   score: 0
   speed: 3
-  power: 2
+  power: 3
   maxShotDelay: 0.25
   curShotDelay: 0
   bulletObjA: {fileID: 9138292480728680733, guid: 60c51e5f9cae9254c8806c4545dff69e,
