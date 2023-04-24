@@ -160,6 +160,19 @@ namespace kan
                 gameObject.SetActive(false);
                 Destroy(collision.gameObject);
             }
+            else if(collision.gameObject.tag == "Item")
+            {
+                Item item = collision.gameObject.GetComponent<Item>();
+                switch (item.type)
+                {
+                    case "Coin":
+                        break;
+                    case "Power":
+                        break;
+                    case "Boom":
+                        break;
+                }
+            }
         }
 
         void OnTriggerExit2D(Collider2D collision)
