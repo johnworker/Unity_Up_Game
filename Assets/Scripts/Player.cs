@@ -21,6 +21,8 @@ namespace kan
         public float speed;
         [Header("力量")]
         public float power;
+        [Header("最大力量")]
+        public float maxPower;
         [Header("最大射擊延遲")]
         public float maxShotDelay;
         [Header("當前射擊延遲")]
@@ -166,8 +168,13 @@ namespace kan
                 switch (item.type)
                 {
                     case "Coin":
+                        score += 1000;
                         break;
                     case "Power":
+                        if (power == maxPower)
+                            score += 500;
+                        else
+                        power++;
                         break;
                     case "Boom":
                         break;
